@@ -101,7 +101,7 @@
 
 	"requireLineFeedAtFileEnd": true,
 
-	"maximumLineLength": 80,
+	"maximumLineLength": 90,
 
 	"requireCapitalizedConstructors": true,
 
