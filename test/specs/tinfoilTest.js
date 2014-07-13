@@ -1,7 +1,6 @@
 // assertion library
 // /////////////////////////////////////////////////////////
 var chai = require('chai').should();
-var sinon = require('sinon');
 
 // stubs
 // /////////////////////////////////////////////////////////
@@ -11,19 +10,66 @@ var mockRequest = {
 	}
 };
 
+var safari = {
+	doNotTrack: '1'
+};
+
+var firefox = {
+	navigator: {
+		doNotTrack: 'yes'
+	}
+};
+
+var msie = {
+	navigator: {
+		msDoNotTrack: 'yes'
+	}
+};
+
 // modules to test
 // /////////////////////////////////////////////////////////
 var tinfoil = require('../../lib/tinfoil');
 
-describe('tinfoil()', function(){
+var putHatOn = function(data){
+	'use strict';
+	return data;
+};
+
+describe('tinfoilhat', function(){
+	'use strict';
 
 	describe('from request', function(){
 
-		it('should run first callback argument if user does not wish to be tracked', function(){
+		it('should execute first callback argument', function(){
 
-				tinfoil(function(data){
-					return data;
-				})(mockRequest).should.equal(mockRequest);
+				tinfoil(putHatOn)(mockRequest).should.equal(mockRequest);
+		});
+	});
+
+	describe('from client', function(){
+
+		describe('when safari', function(){
+
+			it('should execute first callback argument', function(){
+
+				tinfoil(putHatOn)(safari).should.equal(safari);
+			});
+		});
+
+		describe('when firefox', function(){
+
+			it('should execute first callback argument', function(){
+
+				tinfoil(putHatOn)(firefox).should.equal(firefox);
+			});
+		});
+
+		describe('when msie', function(){
+
+			it('should execute first callback argument', function(){
+
+				tinfoil(putHatOn)(msie).should.equal(msie);
+			});
 		});
 	});
 });

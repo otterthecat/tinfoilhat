@@ -21,7 +21,7 @@ The first argument is required, and is called if the users does NOT wish to be t
 	tinfoil(putHatOn)(request);
 
 	// 'request' is HTTP request object, or optionally
-	// a browser's 'navigator' object.
+	// a browser's 'window' object.
 ```
 If the user has not activated DO NOT TRACK, then the callback will not be called.
 
@@ -41,5 +41,5 @@ To execute code based on DO NOT TRACK being disabled, use the second - and optio
 	tinfoil(putHatOn, removeHat)(request);
 
 	// 'request' is HTTP request object, or optionally
-	// a browser's 'navigator' object.
+	// a browser's 'window' object.
 ```
