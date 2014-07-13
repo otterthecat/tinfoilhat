@@ -67,11 +67,22 @@ gulp.task('plato', function(){
 		}));
 });
 
-gulp.task('test', function (cb) {
-  gulp.src(['lib/**/*.js', 'main.js'])
+gulp.task('complexity', function(){
+	gulp.src(sources)
+		.pipe(complexity());
+});
+
+
+gulp.task('test', function(){
+	gulp.src(['./test/specs/*.js'])
+		.pipe(mocha());
+});
+
+gulp.task('comverage', function (cb) {
+  gulp.src(['./lib/**/*.js'])
     .pipe(istanbul()) // Covering files
     .on('finish', function () {
-      gulp.src(['test/*.js'])
+      gulp.src(['./test/specs/*.js'])
         .pipe(mocha())
         .pipe(istanbul.writeReports('./metrics/coverage')) // Creating the reports after tests runned
         .on('end', cb);
@@ -79,5 +90,5 @@ gulp.task('test', function (cb) {
 });
 
 // Grouped Tasks
-gulp.task('default', ['format', 'lint']);
-gulp.task('report', ['plato', 'test']);
+gulp.task('default', ['format', 'lint', 'complexity', 'test']);
+gulp.task('report', ['plato', 'coverage']);
