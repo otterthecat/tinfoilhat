@@ -68,7 +68,11 @@ gulp.task('format', function () {
 	'use strict';
 
 	gulp.src(sources)
-		.pipe(jscs());
+		.pipe(jscs())
+		.on('error', function (err) {
+			console.error('\nJSCS ERROR:');
+			console.log(err.message + '\n');
+		});
 });
 
 gulp.task('lint', function () {
@@ -76,7 +80,8 @@ gulp.task('lint', function () {
 
 	gulp.src(sources)
 		.pipe(jshint())
-		.pipe(jshint.reporter(stylish));
+		.pipe(jshint.reporter(stylish))
+		.pipe(jshint.reporter('fail'));
 });
 
 gulp.task('plato', function () {
@@ -108,7 +113,7 @@ gulp.task('test', function (cb) {
 		.pipe(istanbul()) // Covering files
 		.on('finish', function () {
 			gulp.src(tests)
-				.pipe(mocha({reporter: 'nyan'}))
+				.pipe(mocha({reporter : 'nyan'}))
 				.pipe(istanbul.writeReports({
 					reporters : ['text-summary']
 				}))
@@ -123,7 +128,7 @@ gulp.task('coverage', function (cb) {
 		.pipe(istanbul()) // Covering files
 		.on('finish', function () {
 			gulp.src(tests)
-				.pipe(mocha({reporter: 'nyan'}))
+				.pipe(mocha({reporter : 'nyan'}))
 				.pipe(istanbul.writeReports('./metrics/coverage'))
 				.on('end', cb);
 		});
