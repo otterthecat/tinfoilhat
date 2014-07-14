@@ -56,8 +56,6 @@
 
 	"disallowDanglingUnderscores": true,
 
-	"disallowSpaceAfterObjectKeys": true,
-
 	"requireCommaBeforeLineBreak": true,
 
 	"requireAlignedObjectValues": "all",
@@ -74,7 +72,6 @@
 
 	"disallowImplicitTypeConversion": [
 		"numeric",
-		"boolean",
 		"binary"
 	],
 

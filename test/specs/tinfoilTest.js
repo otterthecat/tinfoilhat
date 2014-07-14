@@ -1,6 +1,7 @@
 // assertion library
 // /////////////////////////////////////////////////////////
-var chai = require('chai').should();
+var chai = require('chai');
+chai.should();
 
 // stubs
 // /////////////////////////////////////////////////////////
@@ -11,18 +12,18 @@ var mockRequest = {
 };
 
 var safari = {
-	doNotTrack: '1'
+	doNotTrack : '1'
 };
 
 var firefox = {
-	navigator: {
-		doNotTrack: 'yes'
+	navigator : {
+		doNotTrack : 'yes'
 	}
 };
 
 var msie = {
-	navigator: {
-		msDoNotTrack: 'yes'
+	navigator : {
+		msDoNotTrack : 'yes'
 	}
 };
 
@@ -30,44 +31,35 @@ var msie = {
 // /////////////////////////////////////////////////////////
 var tinfoil = require('../../lib/tinfoil');
 
-var putHatOn = function(data){
+var putHatOn = function (data) {
 	'use strict';
 	return data;
 };
 
-describe('tinfoilhat', function(){
+describe('tinfoilhat', function () {
 	'use strict';
 
-	describe('from request', function(){
-
-		it('should execute first callback argument', function(){
-
-				tinfoil(putHatOn)(mockRequest).should.equal(mockRequest);
+	describe('from request', function () {
+		it('should execute first callback argument', function () {
+			tinfoil(putHatOn)(mockRequest).should.equal(mockRequest);
 		});
 	});
 
-	describe('from client', function(){
-
-		describe('when safari', function(){
-
-			it('should execute first callback argument', function(){
-
+	describe('from client', function () {
+		describe('when safari', function () {
+			it('should execute first callback argument', function () {
 				tinfoil(putHatOn)(safari).should.equal(safari);
 			});
 		});
 
-		describe('when firefox', function(){
-
-			it('should execute first callback argument', function(){
-
+		describe('when firefox', function () {
+			it('should execute first callback argument', function () {
 				tinfoil(putHatOn)(firefox).should.equal(firefox);
 			});
 		});
 
-		describe('when msie', function(){
-
-			it('should execute first callback argument', function(){
-
+		describe('when msie', function () {
+			it('should execute first callback argument', function () {
 				tinfoil(putHatOn)(msie).should.equal(msie);
 			});
 		});
