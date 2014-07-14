@@ -101,11 +101,19 @@ gulp.task('complexity', function () {
 });
 
 
-gulp.task('test', function () {
+gulp.task('test', function (cb) {
 	'use strict';
 
-	gulp.src(tests)
-		.pipe(mocha());
+	gulp.src(['./lib/**/*.js'])
+		.pipe(istanbul()) // Covering files
+		.on('finish', function () {
+			gulp.src(tests)
+				.pipe(mocha({reporter: 'nyan'}))
+				.pipe(istanbul.writeReports({
+					reporters : ['text-summary']
+				}))
+				.on('end', cb);
+		});
 });
 
 gulp.task('coverage', function (cb) {
@@ -115,7 +123,7 @@ gulp.task('coverage', function (cb) {
 		.pipe(istanbul()) // Covering files
 		.on('finish', function () {
 			gulp.src(tests)
-				.pipe(mocha())
+				.pipe(mocha({reporter: 'nyan'}))
 				.pipe(istanbul.writeReports('./metrics/coverage'))
 				.on('end', cb);
 		});
