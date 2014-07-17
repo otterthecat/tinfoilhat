@@ -6,24 +6,50 @@ chai.should();
 // stubs
 // /////////////////////////////////////////////////////////
 var mockRequest = {
-	headers : {
-		DNT : 1
+	on : {
+		headers : {
+			dnt : '1'
+		}
+	},
+	off : {
+		headers : {
+			dnt : ''
+		}
 	}
 };
 
 var safari = {
-	doNotTrack : '1'
+	on : {
+		doNotTrack : '1'
+	},
+	off : {
+		doNotTrack : ''
+	}
 };
 
 var firefox = {
-	navigator : {
-		doNotTrack : 'yes'
+	on : {
+		navigator : {
+			doNotTrack : 'yes'
+		}
+	},
+	off : {
+		navigator : {
+			doNotTrack : 'no'
+		}
 	}
 };
 
 var msie = {
-	navigator : {
-		msDoNotTrack : 'yes'
+	on : {
+		navigator : {
+			msDoNotTrack : 'yes'
+		}
+	},
+	off : {
+		navigator : {
+			doNotTrack : 'no'
+		}
 	}
 };
 
@@ -36,31 +62,67 @@ var putHatOn = function (data) {
 	return data;
 };
 
+var removeHat = function (data) {
+	'use strict';
+	return {inactive: data};
+};
+
 describe('tinfoilhat', function () {
 	'use strict';
 
-	describe('from request', function () {
-		it('should execute first callback argument', function () {
-			tinfoil(putHatOn)(mockRequest).should.equal(mockRequest);
+	describe('when DO NOT TRACK is active', function () {
+
+		describe('from request', function () {
+			it('should execute first callback argument', function () {
+				tinfoil(putHatOn)(mockRequest.on).should.equal(mockRequest.on);
+			});
+		});
+
+		describe('from client', function () {
+			describe('when safari', function () {
+				it('should execute first callback argument', function () {
+					tinfoil(putHatOn)(safari.on).should.equal(safari.on);
+				});
+			});
+
+			describe('when firefox', function () {
+				it('should execute first callback argument', function () {
+					tinfoil(putHatOn)(firefox.on).should.equal(firefox.on);
+				});
+			});
+
+			describe('when msie', function () {
+				it('should execute first callback argument', function () {
+					tinfoil(putHatOn)(msie.on).should.equal(msie.on);
+				});
+			});
 		});
 	});
 
-	describe('from client', function () {
-		describe('when safari', function () {
-			it('should execute first callback argument', function () {
-				tinfoil(putHatOn)(safari).should.equal(safari);
+	describe('when DO NOT TRACK is inactive/off', function () {
+		describe('from request', function () {
+			it('should execute second callback argument', function () {
+				tinfoil(putHatOn, removeHat)(mockRequest.off).inactive.should.equal(mockRequest.off);
 			});
 		});
 
-		describe('when firefox', function () {
-			it('should execute first callback argument', function () {
-				tinfoil(putHatOn)(firefox).should.equal(firefox);
+		describe('from client', function () {
+			describe('when safari', function () {
+				it('should execute second callback argument', function () {
+					tinfoil(putHatOn, removeHat)(safari.off).inactive.should.equal(safari.off);
+				});
 			});
-		});
 
-		describe('when msie', function () {
-			it('should execute first callback argument', function () {
-				tinfoil(putHatOn)(msie).should.equal(msie);
+			describe('when firefox', function () {
+				it('should execute second callback argument', function () {
+					tinfoil(putHatOn, removeHat)(firefox.off).inactive.should.equal(firefox.off);
+				});
+			});
+
+			describe('when msie', function () {
+				it('should execute second callback argument', function () {
+					tinfoil(putHatOn, removeHat)(msie.off).inactive.should.equal(msie.off);
+				});
 			});
 		});
 	});
