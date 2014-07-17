@@ -64,14 +64,13 @@ var putHatOn = function (data) {
 
 var removeHat = function (data) {
 	'use strict';
-	return {inactive: data};
+	return {inactive : data};
 };
 
 describe('tinfoilhat', function () {
 	'use strict';
 
 	describe('when DO NOT TRACK is active', function () {
-
 		describe('from request', function () {
 			it('should execute first callback argument', function () {
 				tinfoil(putHatOn)(mockRequest.on).should.equal(mockRequest.on);
@@ -102,26 +101,30 @@ describe('tinfoilhat', function () {
 	describe('when DO NOT TRACK is inactive/off', function () {
 		describe('from request', function () {
 			it('should execute second callback argument', function () {
-				tinfoil(putHatOn, removeHat)(mockRequest.off).inactive.should.equal(mockRequest.off);
+				tinfoil(putHatOn, removeHat)(mockRequest.off).inactive
+					.should.equal(mockRequest.off);
 			});
 		});
 
 		describe('from client', function () {
 			describe('when safari', function () {
 				it('should execute second callback argument', function () {
-					tinfoil(putHatOn, removeHat)(safari.off).inactive.should.equal(safari.off);
+					tinfoil(putHatOn, removeHat)(safari.off).inactive
+						.should.equal(safari.off);
 				});
 			});
 
 			describe('when firefox', function () {
 				it('should execute second callback argument', function () {
-					tinfoil(putHatOn, removeHat)(firefox.off).inactive.should.equal(firefox.off);
+					tinfoil(putHatOn, removeHat)(firefox.off).inactive
+						.should.equal(firefox.off);
 				});
 			});
 
 			describe('when msie', function () {
 				it('should execute second callback argument', function () {
-					tinfoil(putHatOn, removeHat)(msie.off).inactive.should.equal(msie.off);
+					tinfoil(putHatOn, removeHat)(msie.off).inactive
+						.should.equal(msie.off);
 				});
 			});
 		});

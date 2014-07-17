@@ -58,7 +58,7 @@
 
 	"requireCommaBeforeLineBreak": true,
 
-	"requireAlignedObjectValues": "all",
+	"requireSpaceAfterObjectKeys": true,
 
 	"requireOperatorBeforeLineBreak": true,
 
