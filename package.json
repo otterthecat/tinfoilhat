@@ -14,7 +14,7 @@
 		"url": "https://github.com/otterthecat/tinfoilhat.git"
 	},
 	"scripts": {
-		"test": "mocha"
+		"test": "./node_modules/.bin/gulp"
 	},
 	"devDependencies": {
 		"chai": "^1.9.1",
