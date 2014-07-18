@@ -12,13 +12,13 @@ The first argument is required, and is called if the users does NOT wish to be t
 ```javascript
 	var tinfoil = require('./tinfoil');
 
-	var putHatOn = function(data){
+	var putHatOn = function(request, response){
 		// run code knowing that "do not track"
 		// is in effect
 	};
 
-	// 'request' is HTTP request object
-	tinfoil(putHatOn)(request);
+	// pass the HTTP request & response to the returned callback
+	tinfoil(putHatOn)(req, res);
 ```
 
 To execute code based on *do not track* being disabled, use the second - and optional - callback argument is called if
@@ -31,14 +31,14 @@ is not active.
 ```javascript
 	var tinfoil = require('./tinfoil');
 
-	var putHatOn = function(data){
+	var putHatOn = function(request, response){
 		// code will fire when "do not track" is enabled
 	};
 
-	var removeHat = function(data){
+	var removeHat = function(request, response){
 		// code will fire if "do not track" is not enabled
 	}
 
-	// 'request' is HTTP request object
-	tinfoil(putHatOn, removeHat)(request);
+	// pass the HTTP request & response to the returned callback
+	tinfoil(putHatOn, removeHat)(req, res);
 ```
