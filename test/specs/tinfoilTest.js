@@ -1,7 +1,10 @@
 // assertion library
 // /////////////////////////////////////////////////////////
 var chai = require('chai');
+var sinon = require('sinon');
+var sinonChai = require('sinon-chai');
 chai.should();
+chai.use(sinonChai);
 
 // stubs
 // /////////////////////////////////////////////////////////
@@ -18,19 +21,29 @@ var mockRequest = {
 	}
 };
 
+var mockResponse = {};
+
 // modules to test
 // /////////////////////////////////////////////////////////
 var tinfoil = require('../../lib/tinfoil');
 
-var putHatOn = function (data) {
+var putHatOn = sinon.spy(function (req, res) {
 	'use strict';
-	return data;
-};
+	return {
+		isActive : true,
+		request : req,
+		response : res
+	};
+});
 
-var removeHat = function (data) {
+var removeHat = sinon.spy(function (req, res) {
 	'use strict';
-	return {inactive : data};
-};
+	return {
+		isActive : false,
+		request : req,
+		response : res
+	};
+});
 
 describe('tinfoilhat', function () {
 	'use strict';
@@ -38,7 +51,12 @@ describe('tinfoilhat', function () {
 	describe('when DO NOT TRACK is active', function () {
 		describe('from request', function () {
 			it('should execute first callback argument', function () {
-				tinfoil(putHatOn)(mockRequest.on).should.equal(mockRequest.on);
+				tinfoil(putHatOn)(mockRequest.on, mockResponse).request.should
+					.equal(mockRequest.on, mockResponse);
+			});
+
+			it('should pass request & response to "active" callback', function () {
+				putHatOn.should.have.been.calledWith(mockRequest.on, mockResponse);
 			});
 		});
 	});
@@ -46,14 +64,19 @@ describe('tinfoilhat', function () {
 	describe('when DO NOT TRACK is inactive/off', function () {
 		describe('from request with callback', function () {
 			it('should execute second callback argument', function () {
-				tinfoil(putHatOn, removeHat)(mockRequest.off).inactive
+				tinfoil(putHatOn, removeHat)(mockRequest.off, mockResponse).request
 					.should.equal(mockRequest.off);
+			});
+
+			it('should pass request & response to "inactive" callback', function () {
+				removeHat.should.always.have.been
+					.calledWith(mockRequest.off, mockResponse);
 			});
 		});
 
 		describe('from request without callback', function () {
 			it('should return false', function () {
-				tinfoil(putHatOn)(mockRequest.off).should.equal(false);
+				tinfoil(putHatOn)(mockRequest.off, mockResponse).should.equal(false);
 			});
 		});
 	});
