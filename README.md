@@ -10,7 +10,7 @@ The first argument is required, and is called if the users does NOT wish to be t
 
 
 ```javascript
-	var tinfoil = require('./tinfoil');
+	var tinfoilhat = require('./tinfoilhat');
 
 	var putHatOn = function(request, response){
 		// run code knowing that "do not track"
@@ -18,7 +18,7 @@ The first argument is required, and is called if the users does NOT wish to be t
 	};
 
 	// pass the HTTP request & response to the returned callback
-	tinfoil(putHatOn)(req, res);
+	tinfoilhat(putHatOn)(req, res);
 ```
 
 To execute code based on *do not track* being disabled, use the second - and optional - callback argument is called if
@@ -29,7 +29,7 @@ is not active.
 
 
 ```javascript
-	var tinfoil = require('./tinfoil');
+	var tinfoilhat = require('./tinfoilhat');
 
 	var putHatOn = function(request, response){
 		// code will fire when "do not track" is enabled
@@ -40,5 +40,5 @@ is not active.
 	}
 
 	// pass the HTTP request & response to the returned callback
-	tinfoil(putHatOn, removeHat)(req, res);
+	tinfoilhat(putHatOn, removeHat)(req, res);
 ```
