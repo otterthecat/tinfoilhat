@@ -1,45 +1,44 @@
 # Tinfoil Hat
 
-NodeJS module for executing code based on user's "DO NOT TRACK" preferences.
-
-Browserify compatible.
-
+NodeJS module for executing code based on user's *do not track* preferences.
 
 ## Usage
 
-Tinfoil Hat can be used either on the server or the client (via Browserify).
+**Tinfoil Hat** checks the HTTP request's *do not track* property, and executes callbacks
+based on the current setting.
 The first argument is required, and is called if the users does NOT wish to be tracked.
+
 
 ```javascript
 	var tinfoil = require('./tinfoil');
 
 	var putHatOn = function(data){
-		// run code knowing that DO NOT TRACK
+		// run code knowing that "do not track"
 		// is in effect
 	};
 
+	// 'request' is HTTP request object
 	tinfoil(putHatOn)(request);
-
-	// 'request' is HTTP request object, or optionally
-	// a browser's 'window' object.
 ```
-If the user has not activated DO NOT TRACK, then the callback will not be called.
 
-To execute code based on DO NOT TRACK being disabled, use the second - and optional - callback argument is called if DO NOT TRACK is unset (i.e. the user knowingly or unknowlingly opts to be tracked).
+To execute code based on *do not track* being disabled, use the second - and optional - callback argument is called if
+*do not track* is unset (i.e. the user knowingly or unknowlingly opts to be tracked).
+
+If this callback is not set, then **Tinfoil Hat will** return false to indicate *do not track*
+is not active.
+
 
 ```javascript
 	var tinfoil = require('./tinfoil');
 
 	var putHatOn = function(data){
-		// code will fire when DO NOT TRACK is enabled
+		// code will fire when "do not track" is enabled
 	};
 
 	var removeHat = function(data){
-		// code will fire if DO NOT TRACK is not enabled
+		// code will fire if "do not track" is not enabled
 	}
 
+	// 'request' is HTTP request object
 	tinfoil(putHatOn, removeHat)(request);
-
-	// 'request' is HTTP request object, or optionally
-	// a browser's 'window' object.
 ```
