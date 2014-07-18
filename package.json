@@ -1,10 +1,9 @@
 {
 	"name": "tinfoilhat",
 	"title": "tinfoilhat",
-	"description": "Call function(s) determined by user's 'DO NOT TRACK' settings",
+	"description": "Execute callbacks based on user's 'DO NOT TRACK' settings",
 	"version": "0.0.1",
-	"private": true,
-	"homepage": "git@github.com:otterthecat/tinfoilhat.git",
+	"homepage": "/otterthecat/tinfoilhat",
 	"author": {
 		"name": "Otter the Cat",
 		"email": "otc@otterthecat.com"
@@ -12,6 +11,15 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/otterthecat/tinfoilhat.git"
+	},
+	"directories": {
+		"lib": "./lib",
+		"test": "./test",
+		"example": "./examples"
+	},
+	"main": "index.js",
+	"engines": {
+		"node": ">=0.10.29"
 	},
 	"scripts": {
 		"test": "./node_modules/.bin/gulp"
@@ -36,7 +44,6 @@
 		"dnt",
 		"do not track",
 		"request",
-		"client",
 		"otc"
 	]
 }
