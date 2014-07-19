@@ -2,7 +2,7 @@
 	"name": "tinfoilhat",
 	"title": "tinfoilhat",
 	"description": "Execute callbacks based on user's 'DO NOT TRACK' settings",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"homepage": "https://github.com/otterthecat/tinfoilhat",
 	"author": {
 		"name": "Otter the Cat",
@@ -18,7 +18,9 @@
 		"example": "./examples"
 	},
 	"main": "index.js",
-	"bugs": "otterthecat/tinfoilhat/issues",
+	"bugs": {
+		"url": "https://github.com/otterthecat/tinfoilhat/issues"
+	},
 	"licenses": {
 		"type": "MIT",
 		"url": "https://github.com/otterthecat/tinfoilhat/blob/master/LICENSE.txt"
