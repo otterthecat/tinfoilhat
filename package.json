@@ -18,9 +18,7 @@
 		"example": "./examples"
 	},
 	"main": "index.js",
-	{
-		"bugs": "otterthecat/tinfoilhat/issues",
-	}
+	"bugs": "otterthecat/tinfoilhat/issues",
 	"licenses": {
 		"type": "MIT",
 		"url": "https://github.com/otterthecat/tinfoilhat/blob/master/LICENSE.txt"
