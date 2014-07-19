@@ -3,14 +3,14 @@
 	"title": "tinfoilhat",
 	"description": "Execute callbacks based on user's 'DO NOT TRACK' settings",
 	"version": "0.0.1",
-	"homepage": "/otterthecat/tinfoilhat",
+	"homepage": "otterthecat/tinfoilhat",
 	"author": {
 		"name": "Otter the Cat",
 		"email": "otc@otterthecat.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "otterthecat/tinfoilhat"
+		"url": "git://github.com/otterthecat/tinfoilhat.git"
 	},
 	"directories": {
 		"lib": "./lib",
@@ -18,10 +18,13 @@
 		"example": "./examples"
 	},
 	"main": "index.js",
-	"engines": {
-		"node": ">=0.8.0"
+	{
+		"bugs": "otterthecat/tinfoilhat/issues",
+	}
+	"licenses": {
+		"type": "MIT",
+		"url": "https://github.com/otterthecat/tinfoilhat/blob/master/LICENSE.txt"
 	},
-	"license": "MIT",
 	"scripts": {
 		"test": "./node_modules/.bin/gulp"
 	},
