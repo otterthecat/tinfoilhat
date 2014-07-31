@@ -16,7 +16,6 @@ var handleDntInactive = function (request, response) {
 
 http.createServer(function (req, res) {
 	'use strict';
-
 	res.writeHead(200, {contentType : 'text/plain'});
 
 	// pass the 2 callbacks to tinfoil.
