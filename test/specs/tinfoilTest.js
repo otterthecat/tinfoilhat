@@ -1,3 +1,4 @@
+/* jshint expr: true */
 // assertion library
 // /////////////////////////////////////////////////////////
 var chai = require('chai');
@@ -45,6 +46,8 @@ var removeHat = sinon.spy(function (req, res) {
 	};
 });
 
+var mockNext = sinon.spy(function () {});
+
 describe('tinfoilhat', function () {
 	'use strict';
 
@@ -78,6 +81,13 @@ describe('tinfoilhat', function () {
 			it('should return false', function () {
 				tinfoil(putHatOn)(mockRequest.off, mockResponse).should.equal(false);
 			});
+		});
+	});
+
+	describe('when "next" function is passed as middleware', function () {
+		it('should be called', function () {
+			tinfoil(putHatOn)(mockRequest.on, mockResponse, mockNext);
+			mockNext.should.have.been.called;
 		});
 	});
 });
