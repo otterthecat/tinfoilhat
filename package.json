@@ -2,7 +2,7 @@
 	"name": "tinfoilhat",
 	"title": "tinfoilhat",
 	"description": "Execute callbacks based on user's 'DO NOT TRACK' settings",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"homepage": "https://github.com/otterthecat/tinfoilhat",
 	"author": {
 		"name": "Otter the Cat",
